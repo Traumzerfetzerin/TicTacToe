@@ -12,9 +12,11 @@ const winning_combinations = [
 
 let currentPlayer = 'circle';
 
+
 function init() {
     render();
 }
+
 
 function render() {
     const contentDiv = document.getElementById('content');
@@ -37,6 +39,18 @@ function render() {
     contentDiv.innerHTML = tableHtml;
 }
 
+
+function restartGame() {
+    fields = [
+        null, null, null,
+        null, null, null,
+        null, null, null,
+    ];
+
+    render();
+}
+
+
 function handleClick(cell, index) {
     if (fields[index] === null) {
         fields[index] = currentPlayer;
@@ -53,9 +67,11 @@ function handleClick(cell, index) {
     }
 }
 
+
 function isGameFinished() {
     return fields.every((field) => field !== null) || getWinningCombination() !== null;
 }
+
 
 function getWinningCombination() {
     for (let i = 0; i < winning_combinations.length; i++) {
@@ -66,6 +82,7 @@ function getWinningCombination() {
     }
     return null;
 }
+
 
 function generateCircleSVG() {
     const color = '#00B0EF';
@@ -78,6 +95,7 @@ function generateCircleSVG() {
         </circle>
     </svg>`;
 }
+
 
 function generateCrossSVG() {
     const color = '#FFC000';
@@ -95,6 +113,7 @@ function generateCrossSVG() {
         </line>
     </svg>`;
 }
+
 
 function drawWinningLine(combination) {
     const lineColor = '#ffffff';
@@ -121,6 +140,3 @@ function drawWinningLine(combination) {
     line.style.transformOrigin = '0 50%';
     document.getElementById('content').appendChild(line);
 }
-
-// Initialisierung der App
-init();
